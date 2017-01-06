@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Tip Calculator </title>
+<style>
+html {background-color: #FFFFCC; text-align:center; color: #333333;
+font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;}
+body {background-color: white;
+	  width: 250px;
+	  border: 2px solid black;
+	  padding: 25px;
+	  margin: 40px;
+}
+ h1 {
+	 text-align: center;
+}
+p#tipPercent{
+	text-align: left;
+	margin-left: 32px;
+}
+p#submitButton{
+	text-align: center;
+}
+p#afterSubmit {
+	color: blue;  
+	text-align: center;
+}
+input[type=submit]:active{
+	background-color: blue;
+}
+input[type=submit] {
+	border-radius:8px;
+	font-size: 13px;
+	background-color: white;
+}
+input[type=text] {
+	width: 80px;
+}
+ 
+</style>
+
+</head>
+<body>
+<h1> <?php echo "Tip Calculator"; ?> </h1> 
+<form action="tipCalc.html" method="POST">
+<p id="firstPart">
+	<br>
+	Bill subtotal: $ <input type="text" name = "num" />
+	<p id="tipPercent"> Tip percentage: </p>
+	<input type="radio" name = "percent" value = 10 /> 10% 
+	<input type="radio" name = "percent" value = 15 /> 15% 
+	<input type="radio" name = "percent" value = 20 /> 20% 
+	<br> 
+</p>
+<p id= "submitButton">
+	<input type="submit" value = "Submit" />
+	<br><br>
+</p>
+	</form>
+<p id="afterSubmit">
+<?php 
+	if(isset($_POST['num']) && isset($_POST['percent'])) {
+		$num = $_POST['num'];
+		if (is_numeric($num)) {
+			$percent = $_POST['percent'];
+			$percent = $percent/100;
+			$tip = $num*$percent;
+			$total = $num+$tip;
+			$tip = round($tip,2);
+			$total = round($total,2);
+			echo "Tip: $" . number_format($tip,2) . "<br><br>";
+			echo "Total: $" . number_format($total,2) . "<br>";
+		}
+		else {
+			//Do Nothing.
+		}
+	}
+?>
+
+</p>
+
+</body>
+</html>
