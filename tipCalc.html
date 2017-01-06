@@ -49,8 +49,11 @@ input[type=text] {
 	<p id="tipPercent"> Tip percentage: </p>
 	<input type="radio" name = "percent" value = 10 /> 10% 
 	<input type="radio" name = "percent" value = 15 /> 15% 
-	<input type="radio" name = "percent" value = 20 /> 20% 
-	<br> 
+	<input type="radio" name = "percent" value = 20 /> 20%  <br>
+	<input type="radio" name = "percent" value ="other" /> Custom: 
+	<input type="text" name="newPercent" /> %
+	<br> <br>
+	Split: <input type= "text" name = "numPeople" /> person(s) <br> <br>
 </p>
 <p id= "submitButton">
 	<input type="submit" value = "Submit" />
@@ -59,9 +62,80 @@ input[type=text] {
 	</form>
 <p id="afterSubmit">
 <?php 
-	if(isset($_POST['num']) && isset($_POST['percent'])) {
+	if (isset($_POST['num']) && isset($_POST['percent']) && isset($_POST['numPeople']))  {
 		$num = $_POST['num'];
-		if (is_numeric($num)) {
+		$people = $_POST['numPeople'];
+		if ($people==0) {
+			//Do Nothing. Error.
+		}
+		else if ($people==1) {
+			$num = $_POST['num'];
+			if (is_numeric($num) && !($_POST['percent']=='other')) {
+				$percent = $_POST['percent'];
+				$percent = $percent/100;
+				$tip = $num*$percent;
+				$total = $num+$tip;
+				$tip = round($tip,2);
+				$total = round($total,2);
+				echo "Tip: $" . number_format($tip,2) . "<br><br>";
+				echo "Total: $" . number_format($total,2) . "<br>";
+			}	
+			else if (is_numeric($num) && $_POST['percent']=='other') {
+				$custom = $_POST['newPercent'];
+				$custom = $custom/100;
+				$tip = $num*$custom;
+				$total = $num+$tip;
+				$tip = round($tip,2);
+				$total = round($total,2);
+				echo "Tip: $" . number_format($tip,2) . "<br><br>";
+				echo "Total: $" . number_format($total,2) . "<br><br>";
+			}
+			else {
+				//Do Nothing.
+			}
+		}
+		else if ($people>1 && is_numeric($people)) {
+			$num = $_POST['num'];
+			if (is_numeric($num) && !($_POST['percent']=='other')) {
+				$percent = $_POST['percent'];
+				$percent = $percent/100;
+				$tip = $num*$percent;
+				$total = $num+$tip;
+				$tip = round($tip,2);
+				$ITip = $tip/$people;
+				$ITip = round($ITip,2); // Individual Tip.
+				$total = round($total,2);
+				$ITotal = $total/$people;
+				$ITotal = round($ITotal,2); //Individual Total.
+				echo "Tip: $" . number_format($tip,2) . "<br><br>";
+				echo "Total: $" . number_format($total,2) . "<br><br>";
+				echo "Tip each: $" . number_format($ITip,2)."<br><br>";
+				echo "Total each: $" . number_format($ITotal,2)."<br><br>";
+			}	
+			else if (is_numeric($num) && $_POST['percent']=='other') {
+				$custom = $_POST['newPercent'];
+				$custom = $custom/100;
+				$tip = $num*$custom;
+				$total = $num+$tip;
+				$tip = round($tip,2);
+				$ITip = $tip/$people;
+				$ITip = round($ITip,2); // Individual Tip.
+				$total = round($total,2);
+				$ITotal = $total/$people;
+				$ITotal = round($ITotal,2); //Individual Total.
+				echo "Tip: $" . number_format($tip,2) . "<br><br>";
+				echo "Total: $" . number_format($total,2) . "<br><br>";
+				echo "Tip each: $" . number_format($ITip,2)."<br><br>";
+				echo "Total each: $" . number_format($ITotal,2)."<br><br>";
+			}
+			else {
+				//Do Nothing.
+			}
+		}
+	}	
+	else if(isset($_POST['num']) && isset($_POST['percent'])) {
+		$num = $_POST['num'];
+		if (is_numeric($num) && !($_POST['percent']=='other')) {
 			$percent = $_POST['percent'];
 			$percent = $percent/100;
 			$tip = $num*$percent;
@@ -70,11 +144,22 @@ input[type=text] {
 			$total = round($total,2);
 			echo "Tip: $" . number_format($tip,2) . "<br><br>";
 			echo "Total: $" . number_format($total,2) . "<br>";
+		}	
+		else if (is_numeric($num) && $_POST['percent']=='other') {
+			$custom = $_POST['newPercent'];
+			$custom = $custom/100;
+			$tip = $num*$custom;
+			$total = $num+$tip;
+			$tip = round($tip,2);
+			$total = round($total,2);
+			echo "Tip: $" . number_format($tip,2) . "<br><br>";
+			echo "Total: $" . number_format($total,2) . "<br><br>";
 		}
 		else {
 			//Do Nothing.
 		}
 	}
+
 ?>
 
 </p>
