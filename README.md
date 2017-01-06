@@ -3,7 +3,7 @@
 
 Submitted by: **Jacky Zheng**
 
-Time spent: **10** hours spent in total
+Time spent: **11** hours spent in total
 
 ## User Stories
 
@@ -12,7 +12,7 @@ The following **required** functionality is complete:
 * [Y] Tip percentage choices use a PHP loop to output three radio buttons.
 * [Y] PHP code sets reasonable default values for the form.
 * [Y] PHP code confirms the presence and correct format of submitted values.
-* [ ] Page indicates any form errors which need to be fixed.
+* [Half] Page indicates any form errors which need to be fixed.
 * [Y] Submitted form values are retained when errors or results are shown.
 
 The following **optional** features are implemented:
@@ -27,7 +27,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 Change again later **
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/k42tT2r.gifv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
