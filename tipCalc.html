@@ -62,7 +62,35 @@ input[type=text] {
 	</form>
 <p id="afterSubmit">
 <?php 
-	if (isset($_POST['num']) && isset($_POST['percent']) && isset($_POST['numPeople']))  {
+	if (empty($_POST['numPeople'])) {
+		if(isset($_POST['num']) && isset($_POST['percent'])) {
+		$num = $_POST['num'];
+		if (is_numeric($num) && !($_POST['percent']=='other')) {
+			$percent = $_POST['percent'];
+			$percent = $percent/100;
+			$tip = $num*$percent;
+			$total = $num+$tip;
+			$tip = round($tip,2);
+			$total = round($total,2);
+			echo "Tip: $" . number_format($tip,2) . "<br><br>";
+			echo "Total: $" . number_format($total,2) . "<br>";
+		}	
+		else if (is_numeric($num) && $_POST['percent']=='other') {
+			$custom = $_POST['newPercent'];
+			$custom = $custom/100;
+			$tip = $num*$custom;
+			$total = $num+$tip;
+			$tip = round($tip,2);
+			$total = round($total,2);
+			echo "Tip: $" . number_format($tip,2) . "<br><br>";
+			echo "Total: $" . number_format($total,2) . "<br><br>";
+		}
+		else {
+			//Do Nothing.
+		}
+	}
+	}
+	else if (isset($_POST['num']) && isset($_POST['percent']) && isset($_POST['numPeople']))  {
 		$num = $_POST['num'];
 		$people = $_POST['numPeople'];
 		if ($people==0) {
@@ -133,32 +161,7 @@ input[type=text] {
 			}
 		}
 	}	
-	else if(isset($_POST['num']) && isset($_POST['percent'])) {
-		$num = $_POST['num'];
-		if (is_numeric($num) && !($_POST['percent']=='other')) {
-			$percent = $_POST['percent'];
-			$percent = $percent/100;
-			$tip = $num*$percent;
-			$total = $num+$tip;
-			$tip = round($tip,2);
-			$total = round($total,2);
-			echo "Tip: $" . number_format($tip,2) . "<br><br>";
-			echo "Total: $" . number_format($total,2) . "<br>";
-		}	
-		else if (is_numeric($num) && $_POST['percent']=='other') {
-			$custom = $_POST['newPercent'];
-			$custom = $custom/100;
-			$tip = $num*$custom;
-			$total = $num+$tip;
-			$tip = round($tip,2);
-			$total = round($total,2);
-			echo "Tip: $" . number_format($tip,2) . "<br><br>";
-			echo "Total: $" . number_format($total,2) . "<br><br>";
-		}
-		else {
-			//Do Nothing.
-		}
-	}
+	else {}
 
 ?>
 
