@@ -45,15 +45,15 @@ input[type=text] {
 <form action="tipCalc.html" method="POST">
 <p id="firstPart">
 	<br>
-	Bill subtotal: $ <input type="text" name = "num" />
+	Bill subtotal: $ <input type="text" name = "num" value = "<?php if(isset($_POST['num'])){echo $_POST['num']; }?>"/>
 	<p id="tipPercent"> Tip percentage: </p>
 	<input type="radio" name = "percent" value = 10 /> 10% 
 	<input type="radio" name = "percent" value = 15 /> 15% 
 	<input type="radio" name = "percent" value = 20 /> 20%  <br>
 	<input type="radio" name = "percent" value ="other" /> Custom: 
-	<input type="text" name="newPercent" /> %
+	<input type="text" name="newPercent" value = "<?php if(isset($_POST['newPercent'])){echo $_POST['newPercent']; }?>"/> %
 	<br> <br>
-	Split: <input type= "text" name = "numPeople" /> person(s) <br> <br>
+	Split: <input type= "text" name = "numPeople" value = "<?php if(isset($_POST['numPeople'])){echo $_POST['numPeople']; }?>"/> person(s) <br> <br>
 </p>
 <p id= "submitButton">
 	<input type="submit" value = "Submit" />
